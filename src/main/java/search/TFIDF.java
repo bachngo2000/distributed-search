@@ -101,4 +101,12 @@ public class TFIDF {
         return words;
     }
 
+    public static List<String> getWordsFromDocument(List<String> lines) {
+        List<String> words = new ArrayList<>();
+        for (String line : lines) {
+            words.addAll(getWordsFromLine(line));
+        }
+        return words;
+    }
+
 }
