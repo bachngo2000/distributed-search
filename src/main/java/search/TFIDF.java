@@ -109,4 +109,20 @@ public class TFIDF {
         return words;
     }
 
+    public static Map<Double, List<String>> getDocumentsScores(List<String> terms,
+                                                               Map<String, DocumentData> documentResults) {
+        TreeMap<Double, List<String>> scoreToDoc = new TreeMap<>();
+
+        Map<String, Double> termToInverseDocumentFrequency = getTermToInverseDocumentFrequencyMap(terms, documentResults);
+
+        for (String document : documentResults.keySet()) {
+            DocumentData documentData = documentResults.get(document);
+
+            double score = calculateDocumentScore(terms, documentData, termToInverseDocumentFrequency);
+
+            addDocumentScoreToTreeMap(scoreToDoc, score, document);
+        }
+        return scoreToDoc.descendingMap();
+    }
+
 }
